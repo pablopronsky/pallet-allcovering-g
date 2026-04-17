@@ -1,11 +1,30 @@
-<div align="center">
+# Nuevo Parket — Autenticación y Esquema (FASE 1)
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+## Pasos para ejecutar localmente
 
-  <h1>Built with AI Studio</h2>
+1. Renombra `.env.example` a `.env` y configura el parámetro `DATABASE_URL` y `AUTH_SECRET`:
+```bash
+cp .env.example .env
+```
+(Para generar un `AUTH_SECRET`, usa `npx auth secret` o corre `openssl rand -base64 32`)
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+2. Aplica el esquema de Prisma en tu base de datos PostgreSQL:
+```bash
+npx prisma db push
+```
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+3. Ejecuta el Seed para popular los 4 usuarios (slots) y 5 productos de ejemplo:
+```bash
+npm run db:seed
+```
 
-</div>
+4. Inicia el servidor de desarrollo:
+```bash
+npm run dev
+```
+
+Las credenciales por defecto son:
+- **Admin**: `admin@np.com` / `admin123`
+- **Vendedor Quilmes**: `quilmes@np.com` / `vend123`
+- **Vendedor La Plata**: `laplata@np.com` / `vend123`
+- **Vendedor Gonnet**: `gonnet@np.com` / `vend123`
