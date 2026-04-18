@@ -1,4 +1,5 @@
 import { LoginForm } from "@/components/login-form";
+import { Logo } from "@/components/logo";
 
 export default function LoginPage() {
   return (
@@ -37,23 +38,7 @@ export default function LoginPage() {
         
         {/* Logo Section */}
         <div className="mb-[48px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img 
-            src="/logo.png" 
-            alt="Nuevo Parket" 
-            className="h-[34px] w-auto block"
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-              const parent = e.currentTarget.parentElement;
-              if (parent) {
-                const textElem = parent.querySelector('.logo-text');
-                if (textElem) (textElem as HTMLElement).style.display = 'flex';
-              }
-            }}
-          />
-          <div className="logo-text text-[28px] font-black tracking-tighter text-[var(--np-fg-strong)] hidden items-center gap-[4px] leading-none">
-            nuevo <span className="text-[var(--np-green)] tracking-tight">parket</span>
-          </div>
+          <Logo size="large" />
         </div>
 
         <div className="mb-[28px]">
