@@ -1,27 +1,59 @@
 import { LoginForm } from "@/components/login-form";
-import { Package } from "lucide-react";
 
 export default function LoginPage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-[var(--bg-main)] p-4 relative overflow-hidden">
-      {/* Decorative background blobs */}
-      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#eff6ff] rounded-full blur-[100px] opacity-60 pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#eff6ff] rounded-full blur-[80px] opacity-60 pointer-events-none" />
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-[1fr_440px] bg-[var(--np-ink)]">
       
-      <div className="w-full max-w-[400px] bg-[var(--card-bg)] rounded-[16px] border border-[var(--border)] p-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-10">
-        <div className="flex flex-col items-center mb-[32px]">
-          <div className="w-[48px] h-[48px] bg-[#eff6ff] rounded-[12px] flex items-center justify-center mb-[16px] text-[var(--accent)]">
-            <Package className="w-[24px] h-[24px]" />
+      {/* 60% Left Hero */}
+      <div className="relative overflow-hidden bg-[#0a0c0e] hidden lg:flex items-end p-[48px]">
+        {/* Background Image (Using Unsplash placeholder with wood/interior vibe for now) */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-55"
+          style={{ backgroundImage: "url('https://picsum.photos/seed/parket/1920/1080?blur=2')" }}
+        />
+        
+        {/* Scrim Overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(135deg, rgba(10,12,14,0.92), rgba(10,12,14,0.45) 60%, rgba(0,103,48,0.15))' }}
+        />
+
+        {/* Copy */}
+        <div className="relative z-10 max-w-[420px]">
+          <div className="np-eyebrow text-[var(--np-green-soft)] mb-[16px]">
+            Control de Consignación
           </div>
-          <h1 className="text-[1.5rem] font-[800] text-[var(--accent)] tracking-[-0.025em]">NUEVO PARKET</h1>
-          <p className="text-[0.85rem] font-[500] text-[var(--text-muted)] mt-[4px]">Control de Consignación</p>
+          <h1 className="np-display text-white mb-[8px]">
+            Pisos en consignación<br />de All Covering.
+          </h1>
+          <p className="text-[var(--np-fg-muted)] mt-[20px] text-[15px] leading-[1.6]">
+            Gestión de stock, ventas y deuda en tiempo real para las tres sucursales de Nuevo Parket.
+          </p>
         </div>
+      </div>
+
+      {/* 40% Right Panel */}
+      <div className="flex flex-col justify-center px-[32px] md:px-[56px] py-[48px] bg-[var(--np-charcoal)] border-l border-[rgba(255,255,255,0.06)] min-h-screen lg:min-h-0">
+        
+        {/* Text Logo Fallback (Since image depends on user upload) */}
+        <div className="mb-[48px]">
+          <div className="text-[28px] font-black tracking-tighter text-[var(--np-fg-strong)] flex items-center gap-[4px] leading-none">
+            nuevo <span className="text-[var(--np-green)] tracking-tight">parket</span>
+          </div>
+        </div>
+
+        <div className="mb-[28px]">
+          <div className="np-eyebrow mb-[10px]">
+            Acceso privado
+          </div>
+          <h2 className="text-[36px] font-[300] m-0 tracking-[-0.02em] font-[var(--font-display)] text-[var(--np-fg-strong)] leading-tight">
+            Ingresá a tu panel
+          </h2>
+        </div>
+
         <LoginForm />
+
       </div>
-      
-      <div className="mt-8 text-center text-[0.75rem] text-[var(--text-muted)] relative z-10">
-        Panel de Administración Exclusivo
-      </div>
-    </main>
+    </div>
   );
 }

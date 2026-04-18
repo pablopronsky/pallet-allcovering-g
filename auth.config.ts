@@ -1,8 +1,42 @@
 import type { NextAuthConfig } from 'next-auth';
 
+const useSecureCookies = process.env.AUTH_URL?.startsWith('https://');
+const cookiePrefix = useSecureCookies ? '__Secure-' : '';
+
 export const authConfig = {
   pages: {
     signIn: '/login',
+  },
+  session: { strategy: 'jwt' },
+  secret: process.env.AUTH_SECRET,
+  trustHost: true,
+  cookies: {
+    sessionToken: {
+      name: `${cookiePrefix}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: true,
+      },
+    },
+    callbackUrl: {
+      name: `${cookiePrefix}next-auth.callback-url`,
+      options: {
+        sameSite: 'none',
+        path: '/',
+        secure: true,
+      },
+    },
+    csrfToken: {
+      name: `${useSecureCookies ? '__Host-' : ''}next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: true,
+      },
+    },
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {

@@ -1,8 +1,12 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const montserrat = Montserrat({ 
+  subsets: ['latin'], 
+  variable: '--font-sans',
+  weight: ['300', '400', '500', '600', '700']
+});
 
 export const metadata: Metadata = {
   title: 'Nuevo Parket — Control de Consignación',
@@ -15,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-AR" className={inter.variable}>
-      <body className="font-sans antialiased bg-[var(--bg-main)] text-[var(--text-main)]">
+    <html lang="es-AR" className={montserrat.variable}>
+      <body className="font-sans antialiased text-[var(--np-fg-strong)]">
         {children}
       </body>
     </html>

@@ -4,14 +4,107 @@
 
 @layer base {
   :root {
-    --bg-main: #f4f7f6;
-    --sidebar-bg: #ffffff;
-    --text-main: #1a1a1a;
-    --text-muted: #6b7280;
-    --accent: #2563eb;
-    --border: #e5e7eb;
-    --success: #10b981;
-    --danger: #ef4444;
-    --card-bg: #ffffff;
+    /* Brand core */
+    --np-green:        #006730;
+    --np-green-hover:  #00552a;
+    --np-green-soft:   #0b7a3d;
+    --np-orange:       #ef7f1a;
+    --np-orange-hover: #d96e10;
+
+    /* Dark neutrals */
+    --np-ink:          #1a1c1f;
+    --np-charcoal:     #24272b;
+    --np-charcoal-2:   #2d3135;
+    --np-slate:        #3a3e43;
+
+    /* Light neutrals */
+    --np-bone:         #f6f5f2;
+    --np-paper:        #ffffff;
+    --np-sand:         #ece8e1;
+    --np-stone:        #c9c6c0;
+    --np-graphite:     #6a6e73;
+
+    /* Text on dark surfaces */
+    --np-fg-strong:    #ffffff;
+    --np-fg:           #e7e6e3;
+    --np-fg-muted:     #a7a9ad;
+    --np-fg-faint:     #6f7378;
+
+    /* Semantic */
+    --np-success:      var(--np-green);
+    --np-warn:         var(--np-orange);
+    --np-danger:       #c0392b;
+    --np-info:         #3a6b8f;
   }
+}
+
+body {
+  background-color: var(--np-ink);
+  color: var(--np-fg-strong);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Global utility classes required for the design */
+.np-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--np-fg-muted);
+  font-weight: 500;
+}
+
+.np-display {
+  font-weight: 300;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--np-fg-strong);
+}
+
+.np-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.01em; border-radius: 2px; border: 0;
+  cursor: pointer; transition: all 120ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  white-space: nowrap;
+}
+.np-btn--primary { background: var(--np-green); color: #fff; }
+.np-btn--primary:hover { background: var(--np-green-hover); }
+.np-btn--orange { background: var(--np-orange); color: #fff; }
+.np-btn--orange:hover { background: var(--np-orange-hover); }
+.np-btn--ghost { background: transparent; color: var(--np-fg); border: 1px solid rgba(255,255,255,0.12); }
+.np-btn--ghost:hover { background: rgba(255,255,255,0.04); color: var(--np-fg-strong); border-color: rgba(255,255,255,0.24); }
+
+.np-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px;
+}
+.np-table th {
+  text-align: left; font-weight: 500; font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--np-fg-muted); padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.np-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--np-fg);
+}
+.np-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+.np-table td.num, .np-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.np-table td.strong { color: var(--np-fg-strong); font-weight: 500; }
+
+.np-form-input {
+  background: var(--np-ink);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--np-fg-strong);
+  font-family: var(--font-sans), sans-serif; font-size: 14px;
+  padding: 10px 12px; border-radius: 2px;
+  transition: border-color 120ms;
+}
+.np-form-input:focus {
+  outline: 0; border-color: var(--np-green-soft);
 }
