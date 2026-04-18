@@ -19,20 +19,20 @@ export default async function StockPage() {
     orderBy: { nombre: 'asc' }
   });
 
-  const SUCURSALES = ['Quilmes', 'La Plata', 'Gonnet'];
+  const SUCURSALES_ENUM = ['QUILMES', 'LA_PLATA', 'GONNET'];
+
+  // Normalize userSucursal for initial filter if not admin
+  const userSucursalDisplay = userSucursal === 'QUILMES' ? "Quilmes" : userSucursal === 'LA_PLATA' ? "La Plata" : userSucursal === 'GONNET' ? "Gonnet" : "Todas";
 
   // Reshape data into exactly what the Stock table needs per sucursal
   const stockData: any[] = [];
 
   productos.forEach(p => {
-    SUCURSALES.forEach(s => {
+    SUCURSALES_ENUM.forEach(s => {
       // Skip if Vendedor and it's not their branch
       if (!isAdmin && s !== userSucursal) return;
 
       const ingresadas = p.ingresos.filter(i => i.sucursal === s).reduce((acc, i) => acc + i.cantidadCajas, 0);
-      
-      // Need to find which ingreso the sale came from to know its branch accurately
-      // Wait, ventas are not tied to sucursal but they are! "sucursal" is in the Venta model.
       const vendidas = p.ventas.filter(v => v.sucursal === s).reduce((acc, v) => acc + v.cantidadCajas, 0);
       const dadas = p.bajas.filter(b => b.sucursal === s).reduce((acc, b) => acc + b.cantidadCajas, 0);
 
@@ -42,7 +42,7 @@ export default async function StockPage() {
         id: `${p.id}-${s}`,
         productoId: p.id,
         producto: p.nombre,
-        sucursal: s,
+        sucursal: s === "QUILMES" ? "Quilmes" : s === "LA_PLATA" ? "La Plata" : "Gonnet",
         ingresadas,
         vendidas,
         dadas,
@@ -68,7 +68,7 @@ export default async function StockPage() {
         </div>
       </div>
 
-      <StockTable initialData={stockData} isAdmin={isAdmin} userSucursal={userSucursal} />
+      <StockTable initialData={stockData} isAdmin={isAdmin} userSucursal={userSucursalDisplay} />
     </>
   );
 }

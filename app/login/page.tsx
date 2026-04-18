@@ -35,9 +35,23 @@ export default function LoginPage() {
       {/* 40% Right Panel */}
       <div className="flex flex-col justify-center px-[32px] md:px-[56px] py-[48px] bg-[var(--np-charcoal)] border-l border-[rgba(255,255,255,0.06)] min-h-screen lg:min-h-0">
         
-        {/* Text Logo Fallback (Since image depends on user upload) */}
+        {/* Logo Section */}
         <div className="mb-[48px]">
-          <div className="text-[28px] font-black tracking-tighter text-[var(--np-fg-strong)] flex items-center gap-[4px] leading-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src="/logo.png" 
+            alt="Nuevo Parket" 
+            className="h-[34px] w-auto block"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+              const parent = e.currentTarget.parentElement;
+              if (parent) {
+                const textElem = parent.querySelector('.logo-text');
+                if (textElem) (textElem as HTMLElement).style.display = 'flex';
+              }
+            }}
+          />
+          <div className="logo-text text-[28px] font-black tracking-tighter text-[var(--np-fg-strong)] hidden items-center gap-[4px] leading-none">
             nuevo <span className="text-[var(--np-green)] tracking-tight">parket</span>
           </div>
         </div>

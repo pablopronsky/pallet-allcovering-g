@@ -31,10 +31,26 @@ export function Sidebar({ role, sucursal }: { role?: string, sucursal?: string |
   return (
     <aside className="w-[240px] bg-[#101215] border-r border-[rgba(255,255,255,0.06)] flex flex-col py-[24px]">
       <div className="px-[24px] pb-[24px] border-b border-[rgba(255,255,255,0.05)] mb-[16px]">
-        {/* We can use a bold text fallback if image isn't available right away */}
-        <div className="text-[22px] font-black tracking-tighter text-[var(--np-fg-strong)] flex items-center gap-[4px] leading-tight">
-          nuevo <span className="text-[var(--np-green)] tracking-tight">parket</span>
-        </div>
+        <Link href="/dashboard" className="block transform hover:scale-[1.02] transition-transform">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src="/logo.png" 
+            alt="Nuevo Parket" 
+            className="h-[28px] w-auto block"
+            onError={(e) => {
+              // Fallback to text if image is missing
+              e.currentTarget.style.display = 'none';
+              const parent = e.currentTarget.parentElement;
+              if (parent) {
+                const textElem = parent.querySelector('.logo-text');
+                if (textElem) (textElem as HTMLElement).style.display = 'flex';
+              }
+            }}
+          />
+          <div className="logo-text text-[22px] font-black tracking-tighter text-[var(--np-fg-strong)] hidden items-center gap-[4px] leading-tight">
+            nuevo <span className="text-[var(--np-green)] tracking-tight">parket</span>
+          </div>
+        </Link>
         <div className="text-[10px] tracking-[0.14em] uppercase text-[var(--np-fg-faint)] mt-[6px]">
           Consignación
         </div>
